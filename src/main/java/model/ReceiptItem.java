@@ -2,9 +2,9 @@ package model;
 
 public class ReceiptItem {
 
-    protected Product product;
-    protected Integer quantity;
-    protected Double price;
+    protected final Product product;
+    protected final Integer quantity;
+    protected final Double price;
     protected Double discount = 0d;
 
     public ReceiptItem(Product product, Integer quantity, Double discount) {

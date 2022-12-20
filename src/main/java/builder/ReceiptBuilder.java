@@ -9,7 +9,7 @@ import java.util.List;
 
 public class ReceiptBuilder implements Builder{
 
-    protected List<ReceiptItem> receiptItems = new ArrayList<>();
+    protected final List<ReceiptItem> receiptItems = new ArrayList<>();
     protected String store;
     protected LocalDateTime dateTime;
     protected Double taxableTotal;

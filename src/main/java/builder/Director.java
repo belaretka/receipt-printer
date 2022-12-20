@@ -13,7 +13,7 @@ public class Director {
     protected static final double DISCOUNT = 10.0d/100;
     protected static final double TAX_RATE = 17.0d/100;
 
-    private Builder builder;
+    private final Builder builder;
 
     private List<String> cards;
     private final Map<Integer, Product> goods;

@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class FileReader implements Reader {
 
-    String filename;
+    final String filename;
 
     public FileReader(String filename) {
         this.filename = "src\\main\\resources\\" + filename;

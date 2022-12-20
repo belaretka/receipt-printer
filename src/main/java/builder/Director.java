@@ -2,6 +2,7 @@ package builder;
 
 import model.Product;
 import model.ReceiptItem;
+import utils.FileReader;
 
 import java.time.LocalDateTime;
 import java.util.*;
@@ -14,28 +15,24 @@ public class Director {
 
     private Builder builder;
 
+    private List<String> cards;
+    private final Map<Integer, Product> goods;
+    private String storeName;
+
     public Director(Builder builder) {
         this.builder = builder;
+        this.goods = new HashMap<>();
     }
 
     public void construct(String[] args) {
 
-        String storeName = "Wallmart";
+        List<String> data = args[0].contains(".txt") ? new FileReader(args[0]).read() : initiateData();
 
-        Map<Integer, Product> goods = new HashMap<>();
-        goods.put(1, new Product("Bread", 10.90, false));
-        goods.put(2, new Product( "Apples", 11.78, true));
-        goods.put(3, new Product("Butter", 15.44, false));
-        goods.put(4, new Product( "10 eggs", 14.98, false));
-        goods.put(5, new Product( "Milk", 12.48, false));
-        goods.put(6, new Product( "Potato chips", 13.78, true));
-
-        List<String> cards = Arrays.asList("c1234","c11121","c23411");
+        setUpData(data);
 
         builder.setStore(storeName);
 
-        Optional<String> discountCard = Arrays.stream(args).filter(str -> str.contains("c")).findAny();
-
+        Optional<String> discountCard = Arrays.stream(args).filter(str -> str.contains("card")).findAny();
         boolean isActiveCard = false;
 
         if (discountCard.isPresent()) {
@@ -51,10 +48,11 @@ public class Director {
 
         for(String str : o) {
             String[] item = str.split("-");
-            int itemId = Integer.parseInt(item[0]);
             int qty = Integer.parseInt(item[1]);
-
-            //тут пробрасывает NullPointerException т.к в аргументах есть такое itemId которого нет
+            int itemId = Integer.parseInt(item[0]);
+            if(!goods.containsKey(itemId)){
+                throw new NoSuchElementException("no product with id:" + itemId);
+            }
             if(isActiveCard && qty > 5 && goods.get(itemId).isPromotional()) {
                 builder.setReceiptItem(new ReceiptItem(goods.get(itemId), qty, DISCOUNT));
             } else {
@@ -68,5 +66,29 @@ public class Director {
         }
         builder.setTaxedSum(TAX_RATE);
         builder.setDateTime(LocalDateTime.now());
+    }
+
+    private void setUpData(List<String> data) {
+        storeName = data.get(0);
+
+        cards = Arrays.stream(data.get(1).split(",")).collect(Collectors.toList());
+
+        data.stream()
+                .skip(2)
+                .map(str -> str.split(", "))
+                .forEach(strings -> goods.put(Integer.parseInt(strings[0]), Product.parseProduct(strings)));
+    }
+
+    private List<String> initiateData() {
+        return Arrays.asList(
+                "Walmart",
+                "card1234,card1112,card2341",
+                "1, Bread, 10.90, false",
+                "2, Apples, 11.78, true",
+                "3, Butter, 15.44, false",
+                "4, 10 eggs, 14.98, false",
+                "5, Milk, 12.48, false",
+                "6, Potato chips, 13.78, true"
+        );
     }
 }

@@ -2,21 +2,20 @@ package utils;
 
 import model.Receipt;
 
-import java.io.ByteArrayOutputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.PrintStream;
+import java.io.*;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
 import java.time.format.DateTimeFormatter;
 
 public class ReceiptPrinter {
+
     static final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
     private final Receipt receipt;
     protected ByteArrayOutputStream baos;
 
     public ReceiptPrinter(Receipt receipt) {
         this.receipt = receipt;
+        formReceipt();
     }
 
     public void formReceipt() {
@@ -40,7 +39,7 @@ public class ReceiptPrinter {
         });
         System.out.println(divider);
         if(!receipt.getDiscountCard().isEmpty()) {
-            System.out.printf("Total discount(%5s): %35.2f\n",receipt.getDiscountCard(), 0-receipt.getTotalDiscount());
+            System.out.printf("Total discount(%s): %32.2f\n",receipt.getDiscountCard(), 0-receipt.getTotalDiscount());
         }
         System.out.printf("Taxable total: %43.2f\n", receipt.getTaxableTotal());
         System.out.printf("VAT17: %51.2f\n", receipt.getTaxedSum());
@@ -56,13 +55,15 @@ public class ReceiptPrinter {
     }
 
     public void printToFile() throws IOException {
+        String filename = "output/receipt " + DateTimeFormatter.ofPattern("yyyy-MM-dd HH-mm-ss").format(receipt.getDateTime()) + ".txt";
+
         FileOutputStream fos = null;
         try {
-            Path path = FileSystems.getDefault().getPath("output/receipt.txt");
+            Path path = FileSystems.getDefault().getPath(filename);
             fos = new FileOutputStream(String.valueOf(path));
             baos.writeTo(fos);
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         } finally {
             assert fos != null;
             fos.close();

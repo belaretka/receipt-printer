@@ -16,8 +16,8 @@ public class ReceiptMain {
 
         Director director = new Director(builder);
         director.construct(args);
+        assert builder != null;
         ReceiptPrinter printer = new ReceiptPrinter(builder.getResult());
-        printer.formReceipt();
         printer.printToConsole();
         try {
             printer.printToFile();

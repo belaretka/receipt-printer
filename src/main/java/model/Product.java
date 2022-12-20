@@ -13,15 +13,9 @@ public class Product {
         this.isPromotional = isPromotional;
     }
 
-    public Product(String productName, Double pricePerUnit, boolean isPromotional) {
-        this.productName = productName;
-        this.pricePerUnit = pricePerUnit;
-        this.isPromotional = isPromotional;
-    }
-
-    public Integer getId() {
-        return id;
-    }
+//    public Integer getId() {
+//        return id;
+//    }
 
     public String getProductName() {
         return productName;
@@ -33,5 +27,13 @@ public class Product {
 
     public boolean isPromotional() {
         return isPromotional;
+    }
+
+    public static Product parseProduct(String[] product) {
+        return new Product(
+                Integer.parseInt(product[0]),
+                product[1],
+                Double.parseDouble(product[2]),
+                Boolean.parseBoolean(product[3]));
     }
 }

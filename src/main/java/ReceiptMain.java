@@ -7,16 +7,14 @@ import java.io.IOException;
 
 public class ReceiptMain {
     public static void main(String[] args) {
-        Builder builder = null;
-        try {
-            builder = new ReceiptBuilder();
-        } catch (Exception e) {
-            e.printStackTrace();
+
+        if(args.length == 0) {
+            throw new IllegalArgumentException("no argument was provided");
         }
 
+        Builder builder = new ReceiptBuilder();
         Director director = new Director(builder);
         director.construct(args);
-        assert builder != null;
         ReceiptPrinter printer = new ReceiptPrinter(builder.getResult());
         printer.printToConsole();
         try {

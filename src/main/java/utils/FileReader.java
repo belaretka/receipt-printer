@@ -13,7 +13,7 @@ public class FileReader implements Reader {
     String filename;
 
     public FileReader(String filename) {
-        this.filename = filename;
+        this.filename = "src\\main\\resources\\" + filename;
     }
 
     @Override

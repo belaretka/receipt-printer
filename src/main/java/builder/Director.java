@@ -10,6 +10,8 @@ import java.util.stream.Collectors;
 
 public class Director {
 
+
+
     protected static final double DISCOUNT = 10.0d/100;
     protected static final double TAX_RATE = 17.0d/100;
 
@@ -61,9 +63,7 @@ public class Director {
         }
 
         builder.setTaxableTotal();
-        if(isActiveCard) {
-            builder.setTotalDiscount();
-        }
+        builder.setTotalDiscount();
         builder.setTaxedSum(TAX_RATE);
         builder.setDateTime(LocalDateTime.now());
     }

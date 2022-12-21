@@ -7,19 +7,19 @@ import java.time.LocalDateTime;
 
 public interface Builder {
 
-    void setReceiptItem(ReceiptItem item);
+    Builder setReceiptItem(ReceiptItem item);
 
-    void setStore(String store);
+    Builder setStore(String store);
 
-    void setDiscountCard(String str);
+    Builder setDiscountCard(String str);
 
-    void setDateTime(LocalDateTime dateTime);
+    Builder setDateTime(LocalDateTime dateTime);
 
-    void setTaxableTotal();
+    Builder setTaxableTotal();
 
-    void setTotalDiscount();
+    Builder setTotalDiscount();
 
-    void setTaxedSum(double taxRate);
+    Builder setTaxedSum(double taxRate);
 
     Receipt getResult();
 }

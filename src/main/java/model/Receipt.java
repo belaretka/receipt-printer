@@ -4,13 +4,13 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class Receipt {
-    protected String store;
-    protected LocalDateTime dateTime;
-    protected List<ReceiptItem> receiptItems;
-    protected String discountCard;
-    protected Double taxableTotal;
-    protected Double totalDiscount;
-    protected Double taxedSum;
+    protected final String store;
+    protected final LocalDateTime dateTime;
+    protected final List<ReceiptItem> receiptItems;
+    protected final String discountCard;
+    protected final Double taxableTotal;
+    protected final Double totalDiscount;
+    protected final Double taxedSum;
 
     public Receipt(String store, LocalDateTime dateTime, List<ReceiptItem> receiptItems, String discountCard, Double taxableTotal, Double totalDiscount, Double taxedSum) {
         this.store = store;

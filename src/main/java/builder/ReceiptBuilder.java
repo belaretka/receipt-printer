@@ -9,7 +9,7 @@ import java.util.List;
 
 public class ReceiptBuilder implements Builder{
 
-    protected List<ReceiptItem> receiptItems = new ArrayList<>();
+    protected final List<ReceiptItem> receiptItems = new ArrayList<>();
     protected String store;
     protected LocalDateTime dateTime;
     protected Double taxableTotal;
@@ -18,44 +18,48 @@ public class ReceiptBuilder implements Builder{
     protected String discountCard = "";
 
     @Override
-    public void setReceiptItem(ReceiptItem item) {
+    public Builder setReceiptItem(ReceiptItem item) {
         receiptItems.add(item);
+        return this;
     }
 
     @Override
-    public void setStore(String s) {
-        this.store = s;
+    public Builder setStore(String s) {
+        this.store = !s.isEmpty() ? s : "Store name";
+        return this;
     }
 
     @Override
-    public void setDateTime(LocalDateTime dateTime) {
+    public Builder setDateTime(LocalDateTime dateTime) {
         this.dateTime = dateTime;
+        return this;
     }
 
     @Override
-    public void setTaxableTotal() {
+    public Builder setTaxableTotal() {
         this.taxableTotal = receiptItems.stream()
-                .map(ReceiptItem::getTotal).reduce(0d, Double::sum);
+                .map(ReceiptItem::getTotal).reduce(0d, Double::sum) - totalDiscount;
+        return this;
     }
 
     @Override
-    public void setTotalDiscount() {
-        this.totalDiscount = receiptItems.stream()
-                .map(ReceiptItem::getDiscount).reduce(0d, Double::sum) ;
+    public Builder setTotalDiscount() {
+        this.totalDiscount = !discountCard.isEmpty() ? receiptItems.stream()
+                .map(ReceiptItem::getDiscount).reduce(0d, Double::sum) : 0d;
+        return this;
     }
 
     @Override
-    public void setTaxedSum(final double tax) {
-        if(discountCard.isEmpty()) {
-            this.taxedSum = (this.taxableTotal - this.totalDiscount) * tax;
-        } else {
-            this.taxedSum = this.taxableTotal * tax;
-        }
+    public Builder setTaxedSum(final double tax) {
+        this.taxedSum = this.taxableTotal * tax;
+        return this;
     }
 
     @Override
-    public void setDiscountCard(String str) {
-        this.discountCard = str;
+    public Builder setDiscountCard(String str) {
+        this.discountCard =
+                !str.isEmpty() ? str : "";
+        return this;
     }
 
     @Override

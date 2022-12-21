@@ -1,6 +1,7 @@
 package builder;
 
 import model.Product;
+import model.Receipt;
 import model.ReceiptItem;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -48,7 +49,7 @@ class ReceiptBuilderTest {
 
     @Test
     void taxableTotalOfOneItemWithoutDiscountShouldBePricePerUnitMultiplyByQty() {
-        assertEquals(42.00, builder.setReceiptItem(item1).setTaxableTotal().getResult().getTaxableTotal());
+        assertEquals(200.00, builder.setReceiptItem(item2).setTaxableTotal().getResult().getTaxableTotal());
     }
 
     @Test

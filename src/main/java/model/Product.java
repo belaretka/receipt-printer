@@ -13,10 +13,6 @@ public class Product {
         this.isPromotional = isPromotional;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
     public String getProductName() {
         return productName;
     }

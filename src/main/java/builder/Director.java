@@ -10,8 +10,6 @@ import java.util.stream.Collectors;
 
 public class Director {
 
-
-
     protected static final double DISCOUNT = 10.0d/100;
     protected static final double TAX_RATE = 17.0d/100;
 
@@ -100,5 +98,17 @@ public class Director {
                 "5, Milk, 12.48, false",
                 "6, Potato chips, 13.78, true"
         );
+    }
+
+    public Builder getBuilder() {
+        return builder;
+    }
+
+    public List<String> getCards() {
+        return cards;
+    }
+
+    public String getStoreName() {
+        return storeName;
     }
 }

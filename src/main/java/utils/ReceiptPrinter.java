@@ -58,9 +58,9 @@ public class ReceiptPrinter {
         //String filename = "output/receipt " + DateTimeFormatter.ofPattern("yyyy-MM-dd HH-mm-ss").format(receipt.getDateTime()) + ".txt";
 
         String filename = "output/receipt.txt";
+        Path path = FileSystems.getDefault().getPath(filename);
         FileOutputStream fos = null;
         try {
-            Path path = FileSystems.getDefault().getPath(filename);
             fos = new FileOutputStream(String.valueOf(path));
             baos.writeTo(fos);
         } catch (IOException e) {

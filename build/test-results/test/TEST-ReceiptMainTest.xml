@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="ReceiptMainTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2022-12-21T12:58:39" hostname="DESKTOP-3V6MSKP" time="0.089">
+  <properties/>
+  <testcase name="mainMethodWithArgumentsWithFileReading()" classname="ReceiptMainTest" time="0.079"/>
+  <testcase name="mainMethodWithArgumentsWithoutFileReading()" classname="ReceiptMainTest" time="0.005"/>
+  <testcase name="mainMethodWithNoArgumentShouldThrowException()" classname="ReceiptMainTest" time="0.003"/>
+  <system-out><![CDATA[                       CASH RECEIPT
+                          Walmart
+-----------------------------------------------------------
+Date: 2022/12/21 15:58:39           
+-----------------------------------------------------------
+  qty|         description|          price|          total|
+    5                Bread           10,90           54,50 
+   10               Apples           11,78          117,80 
+                                  discount          -11,78
+                       total with discount          106,02
+-----------------------------------------------------------
+Total discount(card1234):                           -11,78
+Taxable total:                                      160,52
+VAT17:                                               27,29
+-----------------------------------------------------------
+TOTAL:                                              187,81
+-----------------------------------------------------------
+
+                       CASH RECEIPT
+                          Walmart
+-----------------------------------------------------------
+Date: 2022/12/21 15:58:39           
+-----------------------------------------------------------
+  qty|         description|          price|          total|
+    5                Bread           10,90           54,50 
+   10               Apples           11,78          117,80 
+                                  discount          -11,78
+                       total with discount          106,02
+-----------------------------------------------------------
+Total discount(card1234):                           -11,78
+Taxable total:                                      160,52
+VAT17:                                               27,29
+-----------------------------------------------------------
+TOTAL:                                              187,81
+-----------------------------------------------------------
+
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -68,18 +68,28 @@ public class Director {
         builder.setDateTime(LocalDateTime.now());
     }
 
-    private void setUpData(List<String> data) {
-        storeName = data.get(0);
+    protected void setUpData(List<String> data) {
+        setStoreName(data.get(0));
+        setDiscountCards(data.get(1));
+        setStoreGoods(data);
+    }
 
-        cards = Arrays.stream(data.get(1).split(",")).collect(Collectors.toList());
-
+    protected void setStoreGoods(List<String> data) {
         data.stream()
                 .skip(2)
                 .map(str -> str.split(", "))
                 .forEach(strings -> goods.put(Integer.parseInt(strings[0]), Product.parseProduct(strings)));
     }
 
-    private List<String> initiateData() {
+    protected void setDiscountCards(String data) {
+        cards = Arrays.stream(data.split(",")).collect(Collectors.toList());
+    }
+
+    protected void setStoreName(String name) {
+        storeName = name;
+    }
+
+    protected List<String> initiateData() {
         return Arrays.asList(
                 "Walmart",
                 "card1234,card1112,card2341",

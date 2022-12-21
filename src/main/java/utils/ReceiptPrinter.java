@@ -33,13 +33,13 @@ public class ReceiptPrinter {
         receipt.getReceiptItems().forEach(item -> {
             System.out.printf("%5s %20s %15.2f %15.2f \n", item.getQuantity(), item.getProductName(), item.getProductPrice(), item.getPrice());
             if(!receipt.getDiscountCard().isEmpty() && item.getDiscount() > 0 ) {
-                System.out.printf("%42s %15.2f\n", "discount", 0-item.getDiscount());
+                System.out.printf("%42s %15.2f\n", "discount", -item.getDiscount());
                 System.out.printf("%42s %15.2f\n","total with discount", item.getTotal());
             }
         });
         System.out.println(divider);
         if(!receipt.getDiscountCard().isEmpty()) {
-            System.out.printf("Total discount(%s): %32.2f\n",receipt.getDiscountCard(), 0-receipt.getTotalDiscount());
+            System.out.printf("Total discount(%s): %32.2f\n",receipt.getDiscountCard(), -receipt.getTotalDiscount());
         }
         System.out.printf("Taxable total: %43.2f\n", receipt.getTaxableTotal());
         System.out.printf("VAT17: %51.2f\n", receipt.getTaxedSum());
@@ -55,8 +55,9 @@ public class ReceiptPrinter {
     }
 
     public void printToFile() throws IOException {
-        String filename = "output/receipt " + DateTimeFormatter.ofPattern("yyyy-MM-dd HH-mm-ss").format(receipt.getDateTime()) + ".txt";
+        //String filename = "output/receipt " + DateTimeFormatter.ofPattern("yyyy-MM-dd HH-mm-ss").format(receipt.getDateTime()) + ".txt";
 
+        String filename = "output/receipt.txt";
         FileOutputStream fos = null;
         try {
             Path path = FileSystems.getDefault().getPath(filename);

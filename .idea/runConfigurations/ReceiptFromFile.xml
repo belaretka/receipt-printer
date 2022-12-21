@@ -1,10 +1,10 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Receipt" type="Application" factoryName="Application">
+  <configuration default="false" name="ReceiptFromFile" type="Application" factoryName="Application">
     <option name="ALTERNATIVE_JRE_PATH" value="17" />
     <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
     <option name="MAIN_CLASS_NAME" value="ReceiptMain" />
     <module name="TestTask.main" />
-    <option name="PROGRAM_PARAMETERS" value="1-5 2-10 card1234" />
+    <option name="PROGRAM_PARAMETERS" value="data.txt 1-5 2-10 3-5 6-5 card1234" />
     <method v="2">
       <option name="Make" enabled="true" />
     </method>
